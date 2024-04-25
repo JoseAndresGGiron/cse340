@@ -14,7 +14,9 @@ const static = require("./routes/static")
 /* ***********************
  * Routes
  *************************/
-
+app.get("/", function(req, res){
+  res.render("index", {title: "Home"})
+})
 /* ***********************
  * View Engine and Templates
  *************************/

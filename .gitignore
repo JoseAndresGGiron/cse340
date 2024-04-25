@@ -9,7 +9,7 @@ node_modules
 
 # .env file is for local use only. It contains
 # values not to be shared and most of the values
-# will be manually created by you or dynamically # created on the hosting server
+# will be manually created by you or dynamical'y # created on the hosting server
 .env
 
 # .DS_Store is only for Mac users

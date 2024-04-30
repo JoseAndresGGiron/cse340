@@ -1,6 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+
+html:not(body) {
+  background-image: url(../images/site/small_check.png);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Source Code Pro", monospace;
+  font-weight: 500;
+  font-style: normal;
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 1.875em;
+  /* 30px/16=1.875em */
+}
+
+h3 {
+  font-size: 1.562em;
+  /* 30px/16=1.875em */
+}
+
+h4 {
+  font-weight: 900;
+  font-size: 1.25em;
+}
+
+li,
+a,
+p {
+  font-family: "Oswald", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 0.875em;
+}
+
+header a {
+  text-decoration: none;
+  font-family: "Source Code Pro", monospace;
+  font-weight: 500;
+  font-style: normal;
+}
+
+header a, a:hover, a:visited, a:active {
+  color: inherit;
+  text-decoration: none;
+}
+header span:first-child{
+  font-size: 3em;
+}
+header div#tools a{
+  font-size: 1.2em;
+}
+body {
+  background-color: #fffffe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh; */
+  margin: 2.5%;
+  border-width: thick;
+  border-style: double;
+  border-color: #ffd803;
+  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+  box-shadow: 20px 20px rgba(0, 0, 0, 0.15);
+  /* width: 83%; */
+}
+
+div#wrapper {
+  margin: 0 auto;
+  min-width: 80vw;
+}
+
+header {
+  margin: 1vh auto;
+}
+
+header#top-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 2.5rem;
+}
+
+nav ul {
+  width: 90%;
+  display: flex;
+  background-color: #ffd803;
+  justify-content: space-evenly;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  list-style: none;
+  color: #272343;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+section {
+  margin-bottom: 4rem;
+}
+
+section div#ownToday {
+  position: absolute;
+  background-color: rgb(227, 246, 245, 0.8);
+  left: 20vw;
+  padding: 1%;
+  border-style: inset;
+  border-color: #757575;
+  border-width: 10px;
+}
+
+section div#ownToday * {
+  margin: 5% 0rem;
+}
+
+a#ownImg {
+  display: block;
+  background-image: url(../images/site/own_today.png);
+  height: 4em;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+div#carImg {
+  background-image: url(../images/vehicles/delorean.jpg);
+  width: 500px;
+  height: 255px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+main {
+  margin: auto 4%;
+}
+
+section#part1 {
+  display: flex;
+  justify-content: center;
+}
+
+section#part2 {
+  display: flex;
+  justify-content: space-evenly;
+  row-gap: 2rem;
+  flex-direction: column;
+}
+
+section#part2 div#upgrades {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 4%;
+  column-gap: 3%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 50%;
+  justify-content: space-between;
+  order: 2;
+}
+
+section#part2 div#upgrades h4 {
+  grid-column: 1/3;
+}
+
+img {
+  background-color: #ffd803;
+}
+
+div.imgContainer {
+  width: 150px;
+  height: 100px;
+  background-position: center;
+  background-color: #bae8e8;
+  background-repeat: no-repeat;
+}
+
+div#fluxImg {
+  background-image: url(../images/upgrades/flux-cap.png);
+}
+
+div#flameImg {
+  background-image: url(../images/upgrades/flame.jpg);
+}
+
+div#bumperImg {
+  background-image: url(../images/upgrades/bumper_sticker.jpg);
+}
+
+div#hubImg {
+  background-image: url(../images/upgrades/hub-cap.jpg);
+}
+
+div#reviews ul {
+  padding: 0 1rem;
+}
+
+div#reviews ul li {
+  margin: 1em auto;
+}
+
+/* Media query for small screens */
+@media screen and (min-width: 768px) {
+  html:not(body) {
+    background-image: url(../images/site/checkerboard.jpg);
+  }
+
+  section#part2 {
+    flex-direction: row;
+    row-gap: 0;
+  }
+
+  section#part2 div#upgrades {
+    order: 1;
+  }
+
+  div#reviews {
+    order: 2;
+  }
 }

@@ -10,6 +10,7 @@ const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
 const app = express()
 const static = require("./routes/static")
+const baseController = require("./controllers/baseController") // Added require statement for baseController
 
 /* ***********************
  * View Engine and Templates
@@ -20,9 +21,17 @@ app.set("layout", "./layouts/layout") // not at views root
 
 app.use(static)
 
+/* ***********************
+ * Routes
+ *************************/
+app.get("/", baseController.buildHome) // Altered route to call baseController method
+
+/* Before line looked like this:
 app.get("/", function(req, res){
   res.render("index", {title: "Home"})
 })
+*/
+
 
 /* ***********************
  * Local Server Information

@@ -12,6 +12,8 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController") // Added require statement for baseController
 const utilities = require("./utilities/"); //Adeded require statment on w3 activities so line 41 works good
+//w3 inventory classification activity
+const inventoryRoute = require("./routes/inventoryRoute")
 
 /* ***********************
  * View Engine and Templates
@@ -28,6 +30,9 @@ app.use(static)
 
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
+
+// Inventory routes - w3 classification activity
+app.use("/inv", inventoryRoute)
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

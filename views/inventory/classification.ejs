@@ -1,0 +1,10 @@
+<!--The Content Heading-->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<!--A Message Block. t is not uncommon to need to display messages in a view, for example, if an error occurs. While we don't currently have a message, we don't know if we will. By adding the capacity to display a message, we're future-proofing our view-->
+<%# messages() %>
+
+<!--The Inventory Items Display-->
+<%- grid %>

@@ -65,6 +65,25 @@ Util.getNav = async function (req, res, next) {
 }
 
 /* ****************************************
+ * Builds HTML for displaying inventory item details
+ **************************************** */
+Util.buildInventoryItemHTML = async function(item) {
+  let html = '<div class="inventory-item">';
+  html += '<img srcset="' + item.inv_image + ' 480w, ' + item.inv_thumbnail + ' 800w"';
+  html += ' sizes="(min-width: 600px) 480px, 800px"';
+  html += ' src="' + item.inv_image + '"';
+  html += ' alt="' + item.inv_make + ' ' + item.inv_model + '" />';  
+  html += '<h2>' + item.inv_make + ' ' + item.inv_model + ' Details' + '</h2>';
+  html += '<p><strong>Price:</strong> $' + new Intl.NumberFormat('en-US').format(item.inv_price) + '</p>';
+  html += '<p><strong>Description:</strong> ' + item.inv_description + '</p>';
+  html += '<p><strong>Color:</strong> ' + item.inv_color + '</p>';
+  html += '<p><strong>Mileage:</strong> ' + new Intl.NumberFormat('en-US').format(item.inv_miles) + '</p>';
+  // Add more details as needed
+  html += '</div>';
+  return html;
+};
+
+/* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
  * General Error Handling

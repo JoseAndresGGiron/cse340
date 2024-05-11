@@ -1,0 +1,12 @@
+<!--The Content Heading-->
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { %>
+  <% res.redirect('/') %>
+<% } %>
+  
+<!--A Message Block-->
+<%# messages() %>
+  
+<!--Inventory Item Details-->
+<%- inventoryItemHTML %>

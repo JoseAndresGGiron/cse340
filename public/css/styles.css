@@ -56,16 +56,23 @@ header a {
   font-style: normal;
 }
 
-header a, a:hover, a:visited, a:active {
+header a,
+a:hover,
+a:visited,
+a:active {
   color: inherit;
   text-decoration: none;
+  font-size: 0.875em;
 }
-header span:first-child{
+
+header span:first-child {
   font-size: 3em;
 }
-header div#tools a{
+
+header div#tools a {
   font-size: 1.2em;
 }
+
 body {
   background-color: #fffffe;
   display: flex;
@@ -100,7 +107,7 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  height: 2.5rem;
+  
 }
 
 nav ul {
@@ -113,13 +120,20 @@ nav ul {
 }
 
 nav ul li {
-  list-style: none;
-  color: #272343;
   height: 100%;
-  margin: 0 auto;
+  width: 100%;
+  list-style: none;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+}
+nav ul li a {
+  color: #272343;
+  text-align: center;
+  text-decoration: none;
+  align-content: center;
+  height: 3em;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 section {
@@ -225,6 +239,30 @@ div#reviews ul li {
   margin: 1em auto;
 }
 
+ul#inv-display {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+ul#inv-display li {
+  list-style: none;
+  min-width: 25vw;
+}
+
+ul#inv-display li img {
+  width: 100%;
+
+}
+
+/*Style for inv/detail */
+.inventory-item {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Media query for small screens */
 @media screen and (min-width: 768px) {
   html:not(body) {
@@ -242,5 +280,24 @@ div#reviews ul li {
 
   div#reviews {
     order: 2;
+  }
+
+  ul#inv-display {
+    flex-direction: row;
+    gap: 2em;
+    
+    margin: 0 auto;
+    
+  }
+
+  /*Style for inv/detail */
+  .inventory-item {
+    max-width: 90%;
+    margin: 0 auto;
+    flex-direction: row;
+    gap: 3em;
+  }
+  .inventory-item img {
+    flex-basis: 70%;
   }
 }

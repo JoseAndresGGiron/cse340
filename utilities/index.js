@@ -73,11 +73,15 @@ Util.buildInventoryItemHTML = async function(item) {
   html += ' sizes="(min-width: 600px) 480px, 800px"';
   html += ' src="' + item.inv_image + '"';
   html += ' alt="' + item.inv_make + ' ' + item.inv_model + '" />';  
+  // Start of new div with id "descriptionPerView"
+  html += '<div id="descriptionPerView">';
   html += '<h2>' + item.inv_make + ' ' + item.inv_model + ' Details' + '</h2>';
   html += '<p><strong>Price:</strong> $' + new Intl.NumberFormat('en-US').format(item.inv_price) + '</p>';
   html += '<p><strong>Description:</strong> ' + item.inv_description + '</p>';
   html += '<p><strong>Color:</strong> ' + item.inv_color + '</p>';
   html += '<p><strong>Mileage:</strong> ' + new Intl.NumberFormat('en-US').format(item.inv_miles) + '</p>';
+  // End of new div
+  html += '</div>';
   // Add more details as needed
   html += '</div>';
   return html;

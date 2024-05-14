@@ -37,8 +37,8 @@ async function getInventoryItemById(inventory_id) {
     );
     return data.rows[0];
   } catch (error) {
-    console.error("Error fetching inventory item by ID:", error);
-    throw error;
+    console.error("getInventoryItemById error:" + error);
+    //throw error;
   }
 }
 

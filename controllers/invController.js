@@ -24,10 +24,10 @@ invCont.buildByClassificationId = async function (req, res, next) {
  *  Controller function to view details of a specific inventory item
  * ************************** */
 invCont.viewInventoryItemDetails = async function(req, res, next) {
+  // Retrieve the inventory item ID from the URL parameters
+  const inventoryId = req.params.inventoryId;
+  
   try {
-    // Retrieve the inventory item ID from the URL parameters
-    const inventoryId = req.params.inventoryId;
-    
     // Call the model function to retrieve the data for the specific inventory item
     const inventoryItem = await invModel.getInventoryItemById(inventoryId);
 
@@ -44,11 +44,11 @@ invCont.viewInventoryItemDetails = async function(req, res, next) {
         inventoryItemHTML: inventoryItemHTML
     });
   } catch (error) {
-    // Handle errors, perhaps by rendering an error page or redirecting
-    console.error("Error fetching inventory item details:", error);
-    res.status(500).send("Error fetching inventory item details");
+    // Express error handling middleware will handle the error
+    next(error);
   }
 };
+
 
 
 

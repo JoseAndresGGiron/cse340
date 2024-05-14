@@ -34,9 +34,15 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes - w3 classification activity
 app.use("/inv", inventoryRoute)
 
+// Trigger intentional error when '/error/trigger-error' is accessed
+app.get('/error/trigger-error', (req, res, next) => {
+  // Trigger intentional error here
+  next(new Error('Intentional error to test error handling'));
+});
+
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
-  next({status: 404, message: 'Sorry, we appear to have lost that page.'})
+  next({status: 400, message: 'Sorry, we appear to have lost that page.'})
 })
 
 /* Before line looked like this:
@@ -50,15 +56,26 @@ app.get("/", function(req, res){
 * Place after all other middleware
 *************************/
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  if(err.status == 404){ message = err.message} else {message = 'Oh no! There was a crash. Maybe try a different route?'}
+  let nav = await utilities.getNav();
+  console.error(`Error at: "${req.originalUrl}": ${err.message}`);
+
+  let message = ''; // Initialize message variable
+  
+  // Check the status code of the error
+  if (err.status === 404) {
+    message = err.message; // Set message for 404 error
+  } else if (err.status === 500) {
+    message = err.message; // Set message for 500 error
+  } else {
+    message = 'Oh no! There was a crash. Maybe try a different route?'; // Default message for other errors
+  }
+
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
     nav
-  })
-})
+  });
+});
 
 /* ***********************
  * Local Server Information

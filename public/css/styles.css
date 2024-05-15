@@ -263,6 +263,29 @@ ul#inv-display li img {
   flex-direction: column;
 }
 
+/*Style for Login form*/
+form#loginForm {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  max-width: 90%;
+  margin: 0 auto;
+}
+form#loginForm div {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+}
+form#loginForm div input {
+  min-height: 2rem;
+}
+form#loginForm button {
+  width: 7em;
+  align-self: center;
+}
+p#loginP {
+  text-align: center;
+}
 /* Media query for small screens */
 @media screen and (min-width: 768px) {
   html:not(body) {

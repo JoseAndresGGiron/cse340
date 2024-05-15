@@ -18,7 +18,8 @@ const baseController = require("./controllers/baseController") // Added require 
 const utilities = require("./utilities/"); //Adeded require statment on w3 activities so line 41 works good
 //w3 inventory classification activity
 const inventoryRoute = require("./routes/inventoryRoute")
-
+//W4 Deliver Login View
+const accountRoute = require("./routes/accountRoute");
 /* ***********************
  * Middleware
  * ************************/
@@ -55,6 +56,9 @@ app.use(static)
 
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
+
+//w4 Deliver Account View
+app.use("/account", accountRoute);
 
 // Inventory routes - w3 classification activity
 app.use("/inv", inventoryRoute)

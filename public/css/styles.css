@@ -264,27 +264,33 @@ ul#inv-display li img {
 }
 
 /*Style for Login form*/
-form#loginForm {
+form.loginForm {
   display: flex;
   flex-direction: column;
   row-gap: 1em;
   max-width: 90%;
   margin: 0 auto;
 }
-form#loginForm div {
+form.loginForm div {
   display: flex;
   flex-direction: column;
   row-gap: 0.5em;
 }
-form#loginForm div input {
+form.loginForm div input {
   min-height: 2rem;
 }
-form#loginForm button {
+form.loginForm button {
   width: 7em;
   align-self: center;
 }
 p#loginP {
   text-align: center;
+}
+form.loginForm input:required{
+  border-left: 5px solid red;
+}
+form.loginForm input:required:valid{
+  border-left: 5px solid green;
 }
 /* Media query for small screens */
 @media screen and (min-width: 768px) {

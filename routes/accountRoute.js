@@ -3,8 +3,13 @@
 const express = require("express");
 const router = express.Router();
 const accountController = require("../controllers/accountController");
+const Util = require("../utilities");
 
 // Route for "/account/login"
-router.get("/login", accountController.buildLogin);
+// I just added the Util.handleErrors
+router.get("/login", Util.handleErrors(accountController.buildLogin));
+
+// Route for "/account/register"
+router.get("/register", Util.handleErrors(accountController.buildRegister));
 
 module.exports = router;

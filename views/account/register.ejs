@@ -1,0 +1,32 @@
+<h1><%= title %></h1>
+
+<!-- Display flash messages if any -->
+<% if (messages && Array.isArray(messages)) { %>
+    <div>
+        <% messages.forEach(function(message) { %>
+            <p><%= message %></p>
+        <% }) %>
+    </div>
+<% } %>
+
+ <!-- Registration form -->
+ <form class="loginForm" action="/account/register" method="POST">
+    <div>
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" placeholder="Chris" required>
+    </div>
+    <div>
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" placeholder="Smith" required>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="chris.smith@example.com"required>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <p>Password must be at least 12 characters long and contain at least 1 capital letter, 1 number, and 1 special character.</p>
+    </div>
+    <button type="submit">Register</button>
+</form>

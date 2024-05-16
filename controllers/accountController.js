@@ -15,5 +15,19 @@ async function buildLogin(req, res, next) {
   });
 }
 
+/* ****************************************
+*  Deliver registration view
+* *************************************** */
+async function buildRegister(req, res, next) {
+  // Get navigation links
+  let nav = await utilities.getNav();
+  
+  // Render the registration view
+  res.render("account/register", {
+    title: "Register",
+    nav,
+  });
+}
+
 // Export the buildLogin function
-module.exports = { buildLogin };
+module.exports = { buildLogin, buildRegister };

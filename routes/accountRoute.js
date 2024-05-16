@@ -12,4 +12,7 @@ router.get("/login", Util.handleErrors(accountController.buildLogin));
 // Route for "/account/register"
 router.get("/register", Util.handleErrors(accountController.buildRegister));
 
+//POST register account Route
+router.post('/register', Util.handleErrors(accountController.registerAccount))
+
 module.exports = router;

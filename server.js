@@ -20,6 +20,9 @@ const utilities = require("./utilities/"); //Adeded require statment on w3 activ
 const inventoryRoute = require("./routes/inventoryRoute")
 //W4 Deliver Login View
 const accountRoute = require("./routes/accountRoute");
+// W4 Provess the Registration
+const bodyParser = require("body-parser")
+
 /* ***********************
  * Middleware
  * ************************/
@@ -40,6 +43,10 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+
+//W4 Process the Registration
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 /* ***********************
  * View Engine and Templates

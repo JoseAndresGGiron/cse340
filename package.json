@@ -19,6 +19,7 @@
     "express-ejs-layouts": "^2.5.1",
     "express-messages": "^1.0.1",
     "express-session": "^1.18.0",
+    "express-validator": "^7.1.0",
     "pg": "^8.8.0"
   },
   "devDependencies": {

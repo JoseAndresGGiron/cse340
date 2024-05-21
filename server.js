@@ -41,6 +41,7 @@ app.use(session({
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
+  //console.log(res.locals.messages); // Log messages to see if they are set
   next()
 })
 

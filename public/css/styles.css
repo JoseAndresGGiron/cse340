@@ -286,7 +286,7 @@ form.loginForm button {
 p#loginP {
   text-align: center;
 }
-form.loginForm input:required{
+form.loginForm input:required:invalid, form.loginForm input:focus:invalid {
   border-left: 5px solid red;
 }
 form.loginForm input:required:valid{

@@ -1,3 +1,7 @@
+//w4 Server Side data Validation learning activities
+const regValidate = require('../utilities/account-validation')
+
+
 //W3 Learning Activities - Deliver Login View
 // Needed Resources
 const express = require("express");
@@ -13,6 +17,6 @@ router.get("/login", Util.handleErrors(accountController.buildLogin));
 router.get("/register", Util.handleErrors(accountController.buildRegister));
 
 //POST register account Route
-router.post('/register', Util.handleErrors(accountController.registerAccount))
+router.post('/register', regValidate.registationRules(), regValidate.checkRegData, Util.handleErrors(accountController.registerAccount))
 
 module.exports = router;

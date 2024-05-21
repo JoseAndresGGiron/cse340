@@ -1,16 +1,17 @@
 <h1><%= title %></h1>
 
 <!-- Display flash messages if any -->
-<% if (messages && Array.isArray(messages)) { %>
-    <div>
-        <% messages.forEach(function(message) { %>
-            <p><%= message %></p>
-        <% }) %>
-    </div>
-<% } %>
+<!-- W4 Server side Data Validation - Learning Activity -->
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
 
- <!-- Registration form -->
- <form class="loginForm" action="/account/register" method="POST">
+<!-- Registration form -->
+<form class="loginForm" action="/account/register" method="POST">
     <div>
         <label for="first_name">First Name:</label>
         <input type="text" id="account_firstname" name="account_firstname" placeholder="Chris" required>
@@ -21,12 +22,20 @@
     </div>
     <div>
         <label for="email">Email:</label>
-        <input type="email" id="account_email" name="account_email" placeholder="chris.smith@example.com"required>
+        <input type="email" id="account_email" name="account_email" 
+               pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
+               placeholder="chris.smith@example.com" 
+               title="Please enter a valid email address (e.g., chris.smith@example.com)" 
+               required>
     </div>
     <div>
         <label for="password">Password:</label>
-        <input type="password" id="account_password" name="account_password" required>
-        <p>Password must be at least 12 characters long and contain at least 1 capital letter, 1 number, and 1 special character.</p>
+        <input type="password" id="account_password" name="account_password"
+            pattern="(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}"
+            title="Password must be at least 12 characters long and contain at least 1 capital letter, 1 number, and 1 special character."
+            required>
+        <p>Password must be at least 12 characters long and contain at least 1 capital letter, 1 number, and 1 special
+            character.</p>
     </div>
     <button type="submit">Register</button>
 </form>

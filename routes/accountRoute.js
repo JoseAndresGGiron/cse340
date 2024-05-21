@@ -13,6 +13,15 @@ const Util = require("../utilities");
 // I just added the Util.handleErrors
 router.get("/login", Util.handleErrors(accountController.buildLogin));
 
+// Process the login attempt
+router.post(
+    //added this on the below line to complete team activity: regValidate.loginRules(), regValidate.checkLoginData,
+    "/login", regValidate.loginRules(), regValidate.checkLoginData,
+    (req, res) => {
+        res.status(200).send('login process')
+    }
+)
+
 // Route for "/account/register"
 router.get("/register", Util.handleErrors(accountController.buildRegister));
 

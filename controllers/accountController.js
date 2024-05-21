@@ -1,15 +1,18 @@
+//W4 team activity paswword
+const bcrypt = require("bcryptjs")
+
 // Require the utilities module
 const utilities = require("../utilities");
 // Require the account model
 const accountModel = require("../models/account-model");
 
 /* ****************************************
-*  Deliver login view
-* *************************************** */
+ *  Deliver login view
+ * *************************************** */
 async function buildLogin(req, res, next) {
   // Get navigation links
   let nav = await utilities.getNav();
-  
+
   // Render the login view
   res.render("account/login", {
     title: "Login",
@@ -19,12 +22,12 @@ async function buildLogin(req, res, next) {
 }
 
 /* ****************************************
-*  Deliver registration view
-* *************************************** */
+ *  Deliver registration view
+ * *************************************** */
 async function buildRegister(req, res, next) {
   // Get navigation links
   let nav = await utilities.getNav();
-  
+
   // Render the registration view
   res.render("account/register", {
     title: "Register",
@@ -39,14 +42,34 @@ async function registerAccount(req, res) {
   let nav = await utilities.getNav();
 
   // Extract registration data from request body
-  const { account_firstname, account_lastname, account_email, account_password } = req.body;
+  const {
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_password
+  } = req.body;
+
+  // Hash the password before storing - w4 team activity
+  let hashedPassword
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the registration.')
+    res.status(500).render("account/register", {
+      title: "Registration",
+      nav,
+      errors: null,
+    })
+  }
 
   // Attempt to register the account
   const regResult = await accountModel.registerAccount(
     account_firstname,
     account_lastname,
     account_email,
-    account_password
+    //account_password commented out as part of w4 team activity, see new variable below
+    hashedPassword
   );
 
   // Check registration result and render appropriate view
@@ -74,4 +97,8 @@ async function registerAccount(req, res) {
 }
 
 // Export the buildLogin function
-module.exports = { buildLogin, buildRegister, registerAccount };
+module.exports = {
+  buildLogin,
+  buildRegister,
+  registerAccount
+};

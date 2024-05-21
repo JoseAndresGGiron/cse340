@@ -14,11 +14,11 @@
 <form class="loginForm" action="/account/register" method="POST">
     <div>
         <label for="first_name">First Name:</label>
-        <input type="text" id="account_firstname" name="account_firstname" placeholder="Chris" required>
+        <input type="text" id="account_firstname" name="account_firstname" placeholder="Chris" required value="<%= locals.account_firstname %>">
     </div>
     <div>
         <label for="last_name">Last Name:</label>
-        <input type="text" id="account_lastname" name="account_lastname" placeholder="Smith" required>
+        <input type="text" id="account_lastname" name="account_lastname" placeholder="Smith" required value="<%= locals.account_lastname %>">
     </div>
     <div>
         <label for="email">Email:</label>
@@ -26,7 +26,7 @@
                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
                placeholder="chris.smith@example.com" 
                title="Please enter a valid email address (e.g., chris.smith@example.com)" 
-               required>
+               required value="<%= locals.account_email %>">
     </div>
     <div>
         <label for="password">Password:</label>

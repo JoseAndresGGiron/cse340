@@ -90,22 +90,25 @@ validate.loginRules = () => {
     return [
         // Email is required and must be a valid email format
         body("account_email")
-            .trim()
-            .isEmail()
-            .normalizeEmail()
-            .withMessage("A valid email is required."),
-        
+        .trim()
+        .isEmail()
+        .normalizeEmail()
+        .withMessage("A valid email is required."),
+
         // Password is required
         body("account_password")
-            .trim()
-            .notEmpty()
-            .withMessage("Password is required."),
+        .trim()
+        .notEmpty()
+        .withMessage("Password is required."),
     ];
 };
 
 //Login
 validate.checkLoginData = async (req, res, next) => {
-    const { account_email, account_password } = req.body;
+    const {
+        account_email,
+        account_password
+    } = req.body;
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav();

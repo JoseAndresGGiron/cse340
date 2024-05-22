@@ -49,8 +49,60 @@ invCont.viewInventoryItemDetails = async function(req, res, next) {
   }
 };
 
+/* ***************************
+ *  Show management view
+ * ************************** */
+invCont.showManagementView = async function (req, res, next) {
+  try {
+    let nav = await utilities.getNav()
+    res.render("./inventory/management", {
+      title: "Inventory Management",
+      nav,
+      flash: req.flash('notice'),
+    })
+  } catch (error) {
+    next(error)
+  }
+}
 
+/* ***************************
+ *  Build add new classification view
+ * ************************** */
+invCont.buildAddClassificationView = async function (req, res, next) {
+  try {
+    let nav = await utilities.getNav();
+    res.render("./inventory/add-classification", {
+      title: "Add New Classification",
+      nav,
+      errors: null, // You can include any initial data or errors you want to pass to the view
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
-
+/* ***************************
+ *  Add new classification to the database
+ * ************************** */
+invCont.addClassification = async function (req, res, next) {
+  const { classification_name } = req.body
+  try {
+    const result = await invModel.addClassification(classification_name)
+    if (result) {
+      req.flash('notice', 'New classification added successfully.')
+      let nav = await utilities.getNav() // Update navigation to include the new classification
+      res.render("./inventory/management", {
+        title: "Inventory Management",
+        nav,
+        flash: req.flash('notice'),
+      })
+    } else {
+      req.flash('notice', 'Failed to add new classification.')
+      res.redirect('/inv/add-classification')
+    }
+  } catch (error) {
+    next(error)
+  }
+}
 
 module.exports = invCont

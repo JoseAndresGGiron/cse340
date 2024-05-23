@@ -11,18 +11,16 @@ const validate = {};
  * ********************************* */
 validate.classificationRules = () => {
     return [
+        // classification_name is required and must not contain spaces or special characters
         body("classification_name")
         .trim()
         .escape()
         .notEmpty()
         .withMessage("Please provide a classification name.")
-        .custom(async (value) => {
+        .custom((value) => {
+            // Check if the value contains any spaces or special characters
             if (/[^\w]/.test(value)) {
                 throw new Error("Classification name must not contain spaces or special characters.");
-            }
-            const nameExists = await inventoryModel.checkExistingClassificationName(value);
-            if (nameExists) {
-                throw new Error("Classification name already exists. Please use a different name.");
             }
             return true;
         }),

@@ -3,7 +3,7 @@ const validate = require("../utilities/inventory-validation")
 
 // Needed Resources 
 const express = require("express")
-const router = new express.Router() 
+const router = new express.Router()
 const invController = require("../controllers/invController")
 const Util = require("../utilities");
 
@@ -23,6 +23,15 @@ router.get("/add-classification", Util.handleErrors(invController.buildAddClassi
 router.post("/add-classification",
     validate.classificationRules(),
     Util.handleErrors(validate.checkClassificationData),
-    Util.handleErrors(invController.addClassification))
+    Util.handleErrors(invController.addClassification));
+
+// Route to serve the add inventory view
+router.get("/add-inventory", Util.handleErrors(invController.buildAddInventory));
+
+//Route to handle the add-inventory form submission with validation middleware
+router.post("/add-inventory",
+    validate.inventoryRules(),
+    Util.handleErrors(validate.checkInventoryData),
+    Util.handleErrors(invController.addItemtoInventory));
 
 module.exports = router;

@@ -22,7 +22,7 @@ router.get("/add-classification", Util.handleErrors(invController.buildAddClassi
 // Route to handle add-classification form submission with validation middleware
 router.post("/add-classification",
     validate.classificationRules(),
-    Util.handleErrors(validate.checkClassificationData),
+    validate.checkClassificationData,
     Util.handleErrors(invController.addClassification));
 
 // Route to serve the add inventory view
@@ -31,7 +31,7 @@ router.get("/add-inventory", Util.handleErrors(invController.buildAddInventory))
 //Route to handle the add-inventory form submission with validation middleware
 router.post("/add-inventory",
     validate.inventoryRules(),
-    Util.handleErrors(validate.checkInventoryData),
+    validate.checkInventoryData,
     Util.handleErrors(invController.addItemtoInventory));
 
 module.exports = router;

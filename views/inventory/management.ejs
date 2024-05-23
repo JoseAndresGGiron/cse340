@@ -1,8 +1,4 @@
-<% if (title) { %>
-    <h1><%= title %></h1>
-  <% } else { %>
-    <% res.redirect('/') %>
-  <% } %>
+<%- messages() %>
 
     <ul>
         <li><a href="/inv/add-classification">Add New Classification</a></li>

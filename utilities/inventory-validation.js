@@ -1,11 +1,9 @@
+const inventoryModel = require("../models/inventory-model");
 const utilities = require(".");
-const inventoryModel = require("../models/inventory-model"); // Import the inventory model
-
 const {
     body,
     validationResult
 } = require("express-validator");
-
 const validate = {};
 
 /* **********************************
@@ -13,18 +11,15 @@ const validate = {};
  * ********************************* */
 validate.classificationRules = () => {
     return [
-        // classification_name is required and must not contain spaces or special characters
         body("classification_name")
         .trim()
         .escape()
         .notEmpty()
         .withMessage("Please provide a classification name.")
         .custom(async (value) => {
-            // Check if the value contains any spaces or special characters
             if (/[^\w]/.test(value)) {
                 throw new Error("Classification name must not contain spaces or special characters.");
             }
-            // Check if classification name already exists in the DB
             const nameExists = await inventoryModel.checkExistingClassificationName(value);
             if (nameExists) {
                 throw new Error("Classification name already exists. Please use a different name.");
@@ -93,7 +88,7 @@ validate.checkInventoryData = async (req, res, next) => {
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav();
         const classificationList = await utilities.buildClassificationList(classification_id);
-        res.render("inventory/add-inventory", {
+        return res.render("inventory/add-inventory", {
             errors: errors.array(),
             title: "Add New Vehicle",
             nav,
@@ -107,11 +102,11 @@ validate.checkInventoryData = async (req, res, next) => {
             inv_year,
             inv_miles,
             inv_color,
-            classification_id
+            classification_id,
         });
-        return;
     }
     next();
 };
 
-module.exports = validate
+
+module.exports = validate;

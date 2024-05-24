@@ -27,7 +27,7 @@ const cookieParser = require("cookie-parser")
  * Middleware
  * ************************/
 app.use(session({
-  store: new (require('connect-pg-simple')(session))({
+  store: new(require('connect-pg-simple')(session))({
     createTableIfMissing: true,
     pool,
   }),
@@ -39,7 +39,7 @@ app.use(session({
 
 // Express Messages Middleware from W4 learning Activities
 app.use(require('connect-flash')())
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res)
   //console.log(res.locals.messages); // Log messages to see if they are set
   next()
@@ -47,11 +47,15 @@ app.use(function(req, res, next){
 
 //W4 Process the Registration
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({
+  extended: true
+})) // for parsing application/x-www-form-urlencoded
 
 //Allow the cookie parser to be implemented throughout the project
 app.use(cookieParser())
 
+//apply to middleware
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates
@@ -83,7 +87,10 @@ app.get('/error/trigger-error', (req, res, next) => {
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
-  next({status: 400, message: 'Sorry, we appear to have lost that page.'})
+  next({
+    status: 400,
+    message: 'Sorry, we appear to have lost that page.'
+  })
 })
 
 /* Before line looked like this:
@@ -93,15 +100,15 @@ app.get("/", function(req, res){
 */
 
 /* ***********************
-* Express Error Handler
-* Place after all other middleware
-*************************/
+ * Express Error Handler
+ * Place after all other middleware
+ *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav();
   console.error(`Error at: "${req.originalUrl}": ${err.message}`);
 
   let message = ''; // Initialize message variable
-  
+
   // Check the status code of the error
   if (err.status === 404) {
     message = err.message; // Set message for 404 error

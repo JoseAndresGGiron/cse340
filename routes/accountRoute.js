@@ -25,4 +25,7 @@ router.get("/register", Util.handleErrors(accountController.buildRegister));
 //POST register account Route
 router.post('/register', regValidate.registationRules(), regValidate.checkRegData, Util.handleErrors(accountController.registerAccount))
 
+//Defatul account Route
+router.get("/", Util.handleErrors(accountController.buildAccountManagement));
+
 module.exports = router;

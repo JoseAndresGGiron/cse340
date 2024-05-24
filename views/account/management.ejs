@@ -1,0 +1,15 @@
+<h1><%= title %></h1>
+
+<!-- Display flash messages if any -->
+<%- messages() %>
+
+<!-- Display errors if any -->
+<% if (errors) { %>
+<ul class="notice">
+    <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+</ul>
+<% } %>
+
+<p>You're logged in</p>

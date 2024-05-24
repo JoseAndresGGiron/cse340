@@ -16,10 +16,7 @@ router.get("/login", Util.handleErrors(accountController.buildLogin));
 // Process the login attempt
 router.post(
     //added this on the below line to complete team activity: regValidate.loginRules(), regValidate.checkLoginData,
-    "/login", regValidate.loginRules(), regValidate.checkLoginData,
-    (req, res) => {
-        res.status(200).send('login process')
-    }
+    "/login", regValidate.loginRules(), regValidate.checkLoginData, Util.handleErrors(accountController.accountLogin)
 )
 
 // Route for "/account/register"

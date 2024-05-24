@@ -8,7 +8,6 @@
 //W4 learning Activity:
 const session = require("express-session")
 const pool = require('./database/')
-
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
@@ -22,7 +21,8 @@ const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute");
 // W4 Provess the Registration
 const bodyParser = require("body-parser")
-
+//W5 learning activity
+const cookieParser = require("cookie-parser")
 /* ***********************
  * Middleware
  * ************************/
@@ -48,6 +48,10 @@ app.use(function(req, res, next){
 //W4 Process the Registration
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+//Allow the cookie parser to be implemented throughout the project
+app.use(cookieParser())
+
 
 /* ***********************
  * View Engine and Templates

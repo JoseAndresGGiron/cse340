@@ -1,6 +1,21 @@
 <%- messages() %>
 
-    <ul>
-        <li><a href="/inv/add-classification">Add New Classification</a></li>
-        <li><a href="/inv/add-inventory">Add New Inventory</a></li>
-    </ul>
+<ul>
+    <li><a href="/inv/add-classification">Add New Classification</a></li>
+    <li><a href="/inv/add-inventory">Add New Inventory</a></li>
+</ul>
+<h2>Manage Inventory</h2>
+<p>Select a classification from the list to see the items belonging to the classification.</p>
+
+<!-- EJS code block to display the classification list -->
+
+<%- classificationSelect %>
+
+<!-- Empty HTML table to display inventory items -->
+<table id="inventoryDisplay"></table>
+
+<!-- Message for when JavaScript is disabled -->
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<!-- Link to the JavaScript file -->
+<script src="../../js/inventory.js"></script>

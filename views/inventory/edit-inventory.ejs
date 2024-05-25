@@ -14,7 +14,7 @@
 </ul>
 <% } %>
 
-<form class="loginForm" action="/inv/update" method="POST">
+<form id="updateForm" class="loginForm" action="/inv/update" method="POST">
 
     <!-- Render the classification select dropdown -->
     <label for="classification">Classification:</label>
@@ -48,5 +48,10 @@
     <label for="color">Color:</label>
     <input type="text" id="inv_color" name="inv_color" value="<%= inv_color %>" required>
 
-    <button type="submit">Update Vehicle</button>
+    <button type="submit" disabled>Update Vehicle</button>
+
+    <!-- w5 - Update Inventory Information (Step 2) -->
+    <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
 </form>
+
+<script src="../../js/inv-update.js"></script>

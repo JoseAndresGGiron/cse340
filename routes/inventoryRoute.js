@@ -40,4 +40,7 @@ router.get("/getInventory/:classification_id", Util.handleErrors(invController.g
 //Route to serve the Modify inventory item from the management view
 router.get("/edit/:inv_id", Util.handleErrors(invController.editInventoryView));
 
+//Route to handle the incoming request from the Modify inventory form
+router.post("/update/", validate.inventoryRules(), validate.checkInventoryData, Util.handleErrors(invController.updateInventory));
+
 module.exports = router;

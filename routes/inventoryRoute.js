@@ -37,4 +37,7 @@ router.post("/add-inventory",
 //Route to serve the getInventory by classification ID on the Management view
 router.get("/getInventory/:classification_id", Util.handleErrors(invController.getInventoryJSON))
 
+//Route to serve the Modify inventory item from the management view
+router.get("/edit/:inv_id", Util.handleErrors(invController.editInventoryView));
+
 module.exports = router;

@@ -1,0 +1,42 @@
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { %>
+<% res.redirect('/') %>
+<% } %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+<ul class="notice">
+    <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+</ul>
+<% } %>
+
+<form id="updateForm" class="loginForm" action="/inv/remove" method="POST">
+
+    <!-- Render the classification select dropdown -->
+    <label for="classification">Classification:</label>
+    <%- classificationSelect %>
+
+    <!-- Other input fields -->
+    <label for="make">Make:</label>
+    <input readonly type="text" id="inv_make" name="inv_make" value="<%= inv_make %>" required>
+
+    <label for="model">Model:</label>
+    <input readonly type="text" id="inv_model" name="inv_model" value="<%= inv_model %>" required>
+
+
+    <label for="price">Price:</label>
+    <input readonly type="number" id="inv_price" name="inv_price" value="<%= inv_price %>" required>
+
+    <label for="year">Year:</label>
+    <input readonly type="number" id="inv_year" name="inv_year" value="<%= inv_year %>" required>
+
+    <p>Confirm Deletion - The delete is permanent.</p>
+    <button type="submit">Delete Vehicle</button>
+
+    <!-- w5 - Update Inventory Information (Step 2) -->
+    <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%= locals.inv_id %>" <% } %>>
+</form>

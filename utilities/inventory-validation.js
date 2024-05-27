@@ -59,7 +59,12 @@ validate.inventoryRules = () => {
         body("inv_image").trim().escape().notEmpty().withMessage("Please provide an image path."),
         body("inv_thumbnail").trim().escape().notEmpty().withMessage("Please provide a thumbnail path."),
         body("inv_price").trim().escape().isNumeric().withMessage("Please provide a valid price."),
-        body("inv_year").isNumeric().withMessage("Please provide a valid year."),
+        body("inv_year")
+        .isNumeric().withMessage("Please provide a valid year.")
+        .custom((value) => {
+            // Convert to string and check length
+            return /^\d{4}$/.test(value.toString());
+        }).withMessage("Please provide a valid four-digit year."),
         body("inv_miles").isNumeric().withMessage("Please provide a valid mileage."),
         body("inv_color").trim().escape().notEmpty().withMessage("Please provide a color."),
         body("classification_id").isNumeric().withMessage("Please choose a classification.")

@@ -43,4 +43,10 @@ router.get("/edit/:inv_id", Util.handleErrors(invController.editInventoryView));
 //Route to handle the incoming request from the Modify inventory form
 router.post("/update/", validate.inventoryRules(), validate.checkInventoryData, Util.handleErrors(invController.updateInventory));
 
+//Route to serve the Delete inventory item from the management view
+router.get("/delete/:inv_id", Util.handleErrors(invController.deleteInventoryView));
+
+//Route to handle the incoming request from the Modify inventory form
+router.post("/remove/", Util.handleErrors(invController.deleteInventory));
+
 module.exports = router;

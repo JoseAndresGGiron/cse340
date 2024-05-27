@@ -23,7 +23,7 @@ router.post(
 router.get("/logout", (req, res) => {
     res.clearCookie("jwt");
     req.flash("notice", "You have successfully logged out.");
-    res.redirect("/account/login");
+    res.redirect("/");
 });
 
 // Route for "/account/register"
@@ -34,5 +34,14 @@ router.post('/register', regValidate.registationRules(), regValidate.checkRegDat
 
 //Defatul account Route
 router.get("/", Util.checkLogin, Util.handleErrors(accountController.buildAccountManagement));
+
+// Route to update account information
+router.get("/update/:account_id", Util.checkLogin, Util.handleErrors(accountController.buildUpdateAccount));
+
+// POST route to handle account update form submission
+router.post("/update", Util.checkLogin, regValidate.updateAccountRules(), regValidate.checkUpdateAccountData, Util.handleErrors(accountController.updateAccount));
+
+// POST route to handle password change form submission
+router.post("/change-password", Util.checkLogin, regValidate.changePasswordRules(), regValidate.checkPasswordChangeData, Util.handleErrors(accountController.changePassword));
 
 module.exports = router;

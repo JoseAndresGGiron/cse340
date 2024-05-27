@@ -12,4 +12,15 @@
 </ul>
 <% } %>
 
+<h2>Welcome <%= accountData.account_firstname %></h2>
+
 <p>You're logged in</p>
+
+<!-- Update account information link -->
+<p><a href="/account/update/<%= accountData.account_id %>">Update Account Information</a></p>
+
+<!-- Conditional rendering for Employee or Admin -->
+<% if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') { %>
+<h3>Inventory Management</h3>
+<p><a href="/inv/">Go to Inventory Management</a></p>
+<% } %>

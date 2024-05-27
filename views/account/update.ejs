@@ -1,0 +1,51 @@
+<h1><%= title %></h1>
+
+<!-- Display flash messages if any -->
+<%- messages() %>
+
+<!-- Display errors if any -->
+<% if (errors) { %>
+<ul class="notice">
+    <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+</ul>
+<% } %>
+
+<!-- Account Update Form -->
+<form class="loginForm" action="/account/update" method="POST">
+    <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+
+    <div>
+        <legend>Account Update</legend>
+        <label for="account_firstname">First Name:</label>
+        <input type="text" id="account_firstname" name="account_firstname" value="<%= accountData.account_firstname %>"
+            required>
+
+        <label for="account_lastname">Last Name:</label>
+        <input type="text" id="account_lastname" name="account_lastname" value="<%= accountData.account_lastname %>"
+            required>
+
+        <label for="account_email">Email:</label>
+        <input type="email" id="account_email" name="account_email" value="<%= accountData.account_email %>" required>
+
+        <button type="submit">Update Account</button>
+    </div>
+</form>
+
+<!-- Change Password Form -->
+<form class="loginForm" action="/account/change-password" method="POST">
+    <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+
+    <div>
+        <legend>Change Password</legend>
+        <p>Password must be at least 12 characters long, contain at least one uppercase letter, one lowercase letter,
+            one number, and one special character.</p>
+
+        <label for="account_password">New Password:</label>
+        <input type="password" id="account_password" name="account_password" required>
+
+        <button type="submit">Change Password</button>
+    </div>
+</form>
+</main>

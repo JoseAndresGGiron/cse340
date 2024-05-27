@@ -135,6 +135,10 @@ nav ul li a {
   margin: 0;
   padding: 0;
 }
+/*Notice Style*/
+.notice {
+  background-color: yellow;
+}
 
 section {
   margin-bottom: 4rem;

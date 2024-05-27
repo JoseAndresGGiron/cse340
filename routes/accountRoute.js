@@ -19,6 +19,13 @@ router.post(
     "/login", regValidate.loginRules(), regValidate.checkLoginData, Util.handleErrors(accountController.accountLogin)
 )
 
+// Process the Logout attempt
+router.get("/logout", (req, res) => {
+    res.clearCookie("jwt");
+    req.flash("notice", "You have successfully logged out.");
+    res.redirect("/account/login");
+});
+
 // Route for "/account/register"
 router.get("/register", Util.handleErrors(accountController.buildRegister));
 

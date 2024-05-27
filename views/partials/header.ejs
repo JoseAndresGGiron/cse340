@@ -1,8 +1,13 @@
 <header id="top-header">
-    <span class="siteName">
-      <a href="/" title="Return to home page">CSE Motors</a>
-    </span>
-    <div id="tools">
-      <a title="Click to log in" href="/account/login">MY ACCOUNT</a>
-    </div>
-  </header>
+  <span class="siteName">
+    <a href="/" title="Return to home page">CSE Motors</a>
+  </span>
+  <div id="tools">
+    <% if (locals.loggedin) { %>
+    <a href="/account" title="Welcome">Welcome <%= locals.accountData.account_firstname %></a>
+    <a href="/account/logout" title="Click to log out">Logout</a>
+    <% } else { %>
+    <a href="/account/login" title="Click to log in">MY ACCOUNT</a>
+    <% } %>
+  </div>
+</header>

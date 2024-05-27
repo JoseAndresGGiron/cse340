@@ -156,4 +156,35 @@ Util.checkLogin = (req, res, next) => {
   }
 }
 
+/* ****************************************
+ * Middleware to check token validity and account type
+ **************************************** */
+Util.checkAccountType = (req, res, next) => {
+  if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, accountData) {
+        if (err) {
+          req.flash("Please log in");
+          res.clearCookie("jwt");
+          return res.redirect("/account/login");
+        }
+        if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') {
+          res.locals.accountData = accountData;
+          res.locals.loggedin = true;
+          next();
+        } else {
+          req.flash("notice", "You do not have permission to access this area.");
+          return res.redirect("/account/login");
+        }
+      }
+    );
+  } else {
+    res.locals.loggedin = false;
+    req.flash("notice", "Please log in.");
+    return res.redirect("/account/login");
+  }
+};
+
 module.exports = Util

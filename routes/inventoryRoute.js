@@ -14,22 +14,24 @@ router.get("/type/:classificationId", Util.handleErrors(invController.buildByCla
 router.get("/detail/:inventoryId", Util.handleErrors(invController.viewInventoryItemDetails));
 
 // Route to serve the management view
-router.get("/", Util.handleErrors(invController.showManagementView));
+router.get("/", Util.checkAccountType, Util.handleErrors(invController.showManagementView));
 
 // Route to serve the add-classification view
-router.get("/add-classification", Util.handleErrors(invController.buildAddClassificationView));
+router.get("/add-classification", Util.checkAccountType, Util.handleErrors(invController.buildAddClassificationView));
 
 // Route to handle add-classification form submission with validation middleware
 router.post("/add-classification",
+    Util.checkAccountType,
     validate.classificationRules(),
     validate.checkClassificationData,
     Util.handleErrors(invController.addClassification));
 
 // Route to serve the add inventory view
-router.get("/add-inventory", Util.handleErrors(invController.buildAddInventory));
+router.get("/add-inventory", Util.checkAccountType, Util.handleErrors(invController.buildAddInventory));
 
 //Route to handle the add-inventory form submission with validation middleware
 router.post("/add-inventory",
+    Util.checkAccountType,
     validate.inventoryRules(),
     validate.checkInventoryData,
     Util.handleErrors(invController.addItemtoInventory));
@@ -38,15 +40,15 @@ router.post("/add-inventory",
 router.get("/getInventory/:classification_id", Util.handleErrors(invController.getInventoryJSON))
 
 //Route to serve the Modify inventory item from the management view
-router.get("/edit/:inv_id", Util.handleErrors(invController.editInventoryView));
+router.get("/edit/:inv_id", Util.checkAccountType, Util.handleErrors(invController.editInventoryView));
 
 //Route to handle the incoming request from the Modify inventory form
-router.post("/update/", validate.inventoryRules(), validate.checkInventoryData, Util.handleErrors(invController.updateInventory));
+router.post("/update/", Util.checkAccountType, validate.inventoryRules(), validate.checkInventoryData, Util.handleErrors(invController.updateInventory));
 
 //Route to serve the Delete inventory item from the management view
-router.get("/delete/:inv_id", Util.handleErrors(invController.deleteInventoryView));
+router.get("/delete/:inv_id", Util.checkAccountType, Util.handleErrors(invController.deleteInventoryView));
 
 //Route to handle the incoming request from the Modify inventory form
-router.post("/remove/", Util.handleErrors(invController.deleteInventory));
+router.post("/remove/", Util.checkAccountType, Util.handleErrors(invController.deleteInventory));
 
 module.exports = router;

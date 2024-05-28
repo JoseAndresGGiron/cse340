@@ -9,7 +9,8 @@
 <form class="loginForm" action="/inv/add-classification" method="POST">
   <label for="classification_name">Classification Name:</label>
   <input type="text" id="classification_name" name="classification_name" required pattern="[a-zA-Z]+"
-    title="Classification name must not contain spaces or special characters." value="<%= locals.classification_name %>">
-    <p>Classification name must not contain spaces or special characters.</p>
+    title="Classification name must not contain spaces or special characters."
+    value="<%= locals.classification_name %>">
+  <p>Classification name must not contain spaces or special characters.</p>
   <button type="submit">Add Classification</button>
 </form>

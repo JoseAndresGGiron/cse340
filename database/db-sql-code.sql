@@ -259,7 +259,7 @@ UPDATE public.inventory
 SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
     inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
 
-/*Code to create Review tables*/
+/*Code to create Reviews table*/
 CREATE TABLE reviews (
     review_id SERIAL PRIMARY KEY,
     review_text TEXT NOT NULL,

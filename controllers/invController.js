@@ -64,6 +64,33 @@ invCont.viewInventoryItemDetails = async function (req, res, next) {
 }
 
 /* ***************************
+ *  Add review
+ * ************************** */
+invCont.addReview = async function (req, res, next) {
+  const {
+      review_text,
+      inventory_id,
+      account_id
+  } = req.body;
+
+  // Validate the input
+  if (!review_text || !inventory_id || !account_id) {
+      req.flash('error', 'All fields are required.');
+      return res.redirect('back');
+  }
+
+  try {
+      console.log('INTENTANDO')
+      // Save the review using the model
+      await invModel.addReview(review_text, inventory_id, account_id);
+      req.flash('success', 'Review added successfully!');
+      res.redirect(`/inv/detail/${inventory_id}`);
+  } catch (error) {
+      next(error);
+  }
+}
+
+/* ***************************
  *  Show management view
  * ************************** */
 invCont.showManagementView = async function (req, res, next) {

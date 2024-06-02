@@ -19,6 +19,7 @@ const utilities = require("./utilities/"); //Adeded require statment on w3 activ
 const inventoryRoute = require("./routes/inventoryRoute")
 //W4 Deliver Login View
 const accountRoute = require("./routes/accountRoute");
+
 // W4 Provess the Registration
 const bodyParser = require("body-parser")
 //W5 learning activity

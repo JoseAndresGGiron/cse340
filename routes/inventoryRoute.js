@@ -13,6 +13,9 @@ router.get("/type/:classificationId", Util.handleErrors(invController.buildByCla
 //Route to build single view of a specific inventory item
 router.get("/detail/:inventoryId", Util.handleErrors(invController.viewInventoryItemDetails));
 
+// Route to handle adding a review
+router.post("/reviews-add", invController.addReview);
+
 // Route to serve the management view
 router.get("/", Util.checkAccountType, Util.handleErrors(invController.showManagementView));
 

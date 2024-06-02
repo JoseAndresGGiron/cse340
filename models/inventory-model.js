@@ -49,7 +49,7 @@ async function getReviewsByItemId(inventory_id) {
   try {
     const query = `
     SELECT r.review_text, 
-       CONCAT(a.account_firstname, ' ', a.account_lastname) AS reviewer_full_name, 
+       CONCAT(LEFT(a.account_firstname, 1), ', ', a.account_lastname) AS reviewer_full_name, 
        r.review_date 
 FROM reviews r 
 JOIN account a ON r.account_id = a.account_id 
@@ -64,6 +64,21 @@ ORDER BY r.review_date DESC
   }
 }
 
+async function addReview(review_text, inv_id, account_id) {
+  const sql = `
+  INSERT INTO reviews (review_text, inv_id, account_id)
+  VALUES ($1, $2, $3)
+  RETURNING *;
+  `;
+  const values = [review_text, inv_id, account_id];
+
+  try {
+    const result = await pool.query(sql, values);
+    return result.rows[0];
+  } catch (error) {
+    throw new Error('Could not add review: ' + error.message);
+  }
+}
 
 /* ***************************
  *  Add new classification
@@ -165,5 +180,6 @@ module.exports = {
   addInventory,
   updateInventory,
   deleteInventory,
-  getReviewsByItemId
+  getReviewsByItemId,
+  addReview
 };

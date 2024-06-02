@@ -117,8 +117,9 @@ Util.buildReviewsHTML = async function (reviews) {
     // Display existing reviews
     reviews.forEach(review => {
       html += '<div class="review">';
+      html += '<p>Reviewer: ' + review.reviewer_full_name+ '</p>';
       html += '<p>' + review.review_text + '</p>';
-      html += '<p>Reviewer: ' + review.reviewer_screen_name + '</p>';
+      
 
     });
   } else {
@@ -136,7 +137,7 @@ Util.buildReviewFormHTML = async function (account_id, inventory_id) {
 
   if (account_id) {
     html += '<h3>Add a Review</h3>';
-    html += '<form action="/reviews/add" method="POST">';
+    html += '<form class="loginForm" action="/inv/reviews-add" method="POST">';
     html += '<textarea name="review_text" rows="4" cols="50" placeholder="Write your review here" required></textarea>';
     html += '<input type="hidden" name="inventory_id" value="' + inventory_id + '">';
     html += '<input type="hidden" name="account_id" value="' + account_id + '">';

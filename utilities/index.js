@@ -71,7 +71,11 @@ Util.getNav = async function (req, res, next) {
 /* ****************************************
  * Builds HTML for displaying inventory item details
  **************************************** */
-Util.buildInventoryItemHTML = async function (item) {
+Util.buildInventoryItemHTML = async function (item, reviews) {
+  if (!reviews) {
+    // Handle the absence of reviews here
+    reviews = []; // Or any other default value or behavior
+  }
   let html = '<div class="inventory-item">';
   html += '<img srcset="' + item.inv_image + ' 480w, ' + item.inv_thumbnail + ' 800w"';
   html += ' sizes="(min-width: 600px) 480px, 800px"';
@@ -86,10 +90,66 @@ Util.buildInventoryItemHTML = async function (item) {
   html += '<p><strong>Mileage:</strong> ' + new Intl.NumberFormat('en-US').format(item.inv_miles) + '</p>';
   // End of new div
   html += '</div>';
-  // Add more details as needed
+
+  // Reviews section
+  //html += await Util.buildReviewsHTML(reviews);
+
+
+
+  // End of new div
+  html += '</div>';
+
+
+
+  return html;
+};
+
+/* ****************************************
+ * Builds HTML for displaying reviews section
+ **************************************** */
+Util.buildReviewsHTML = async function (reviews) {
+  let html = '<div id="reviews">';
+
+  // Add heading for reviews
+  html += '<h2>Reviews</h2>';
+
+  if (reviews.length > 0) {
+    // Display existing reviews
+    reviews.forEach(review => {
+      html += '<div class="review">';
+      html += '<p>' + review.review_text + '</p>';
+      html += '<p>Reviewer: ' + review.reviewer_screen_name + '</p>';
+
+    });
+  } else {
+    html += '<p>No reviews yet.</p>';
+  }
   html += '</div>';
   return html;
 };
+
+Util.buildReviewFormHTML = async function (account_id, inventory_id) {
+  let html = '<div id="reviewForm">';
+
+  // Debugging statement to check account_id and inventory_id
+  console.log('Building review form for account_id:', account_id, 'and inventory_id:', inventory_id);
+
+  if (account_id) {
+    html += '<h3>Add a Review</h3>';
+    html += '<form action="/reviews/add" method="POST">';
+    html += '<textarea name="review_text" rows="4" cols="50" placeholder="Write your review here" required></textarea>';
+    html += '<input type="hidden" name="inventory_id" value="' + inventory_id + '">';
+    html += '<input type="hidden" name="account_id" value="' + account_id + '">';
+    html += '<button type="submit">Submit Review</button>';
+    html += '</form>';
+  } else {
+    html += '<p>To add a review, please <a href="/account/login">log in</a>.</p>';
+  }
+
+  html += '</div>';
+  return html;
+};
+
 
 /* ****************************************
  * Builds HTML for displaying classification items details - w4 assignment

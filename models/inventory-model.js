@@ -43,6 +43,29 @@ async function getInventoryItemById(inventory_id) {
 }
 
 /* ***************************
+ *  Get reviews by inventory ID
+ * ************************** */
+async function getReviewsByItemId(inventory_id) {
+  try {
+    const query = `
+    SELECT r.review_text, 
+       CONCAT(a.account_firstname, ' ', a.account_lastname) AS reviewer_full_name, 
+       r.review_date 
+FROM reviews r 
+JOIN account a ON r.account_id = a.account_id 
+WHERE r.inv_id = $1 
+ORDER BY r.review_date DESC
+  `;
+    const result = await pool.query(query, [inventory_id]);
+    return result.rows;
+  } catch (error) {
+    console.error('Error fetching reviews:', error);
+    throw error;
+  }
+}
+
+
+/* ***************************
  *  Add new classification
  * ************************** */
 async function addClassification(classification_name) {
@@ -141,5 +164,6 @@ module.exports = {
   addClassification,
   addInventory,
   updateInventory,
-  deleteInventory
+  deleteInventory,
+  getReviewsByItemId
 };

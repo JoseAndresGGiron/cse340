@@ -31,8 +31,20 @@ invCont.viewInventoryItemDetails = async function (req, res, next) {
     // Call the model function to retrieve the data for the specific inventory item
     const inventoryItem = await invModel.getInventoryItemById(inventoryId);
 
+    // Call the model function to retrieve reviews for the specific inventory item
+    const reviews = await invModel.getReviewsByItemId(inventoryId);
+
     // Build HTML for the specific inventory item using utilities function
     const inventoryItemHTML = await utilities.buildInventoryItemHTML(inventoryItem);
+
+    // Build HTML for reviews section
+    const reviewsHTML = await utilities.buildReviewsHTML(reviews);
+
+    // Determine if the user is logged in and get the account_id if available
+    const accountData = res.locals.accountData;
+
+    // Review form
+    const reviewFormHTML = await utilities.buildReviewFormHTML(accountData ? accountData.account_id : null, inventoryId);
 
     // Get navigation links
     let nav = await utilities.getNav();
@@ -41,7 +53,9 @@ invCont.viewInventoryItemDetails = async function (req, res, next) {
     res.render("./inventory/detail", {
       title: inventoryItem.inv_year + ' ' + inventoryItem.inv_make + ' ' + inventoryItem.inv_model,
       nav,
-      inventoryItemHTML: inventoryItemHTML
+      inventoryItemHTML: inventoryItemHTML,
+      reviewsHTML: reviewsHTML,
+      reviewFormHTML: reviewFormHTML
     });
   } catch (error) {
     // Express error handling middleware will handle the error

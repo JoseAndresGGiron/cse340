@@ -1,12 +1,17 @@
 <!--The Content Heading-->
 <% if (title) { %>
-  <h1><%= title %></h1>
+<h1><%= title %></h1>
 <% } else { %>
-  <% res.redirect('/') %>
+<% res.redirect('/') %>
 <% } %>
-  
+
 <!--A Message Block-->
 <%# messages() %>
-  
+
 <!--Inventory Item Details-->
 <%- inventoryItemHTML %>
+
+<!-- Reviews Section -->
+<%- reviewsHTML %>
+
+<%- reviewFormHTML %>

@@ -80,7 +80,6 @@ invCont.addReview = async function (req, res, next) {
   }
 
   try {
-      console.log('INTENTANDO')
       // Save the review using the model
       await invModel.addReview(review_text, inventory_id, account_id);
       req.flash('success', 'Review added successfully!');

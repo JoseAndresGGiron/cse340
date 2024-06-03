@@ -83,6 +83,7 @@ async function getAccountReviews(account_id) {
     const query = `
       SELECT r.review_text, 
              r.review_date,
+             r.review_id,
              i.inv_make,
              i.inv_model,
              i.inv_year,
@@ -98,6 +99,57 @@ async function getAccountReviews(account_id) {
   }
 }
 
+// Function to get review by review_id
+async function getReviewById(review_id) {
+  try {
+    const query = `
+          SELECT review_id, review_text, review_date
+          FROM reviews
+          WHERE review_id = $1
+      `;
+    const result = await pool.query(query, [review_id]);
+    // Check if a review with the given review_id exists
+    if (result.rows.length === 0) {
+      return null; // Return null if review not found
+    }
+    return result.rows[0]; // Return the review data
+  } catch (error) {
+    throw error;
+  }
+}
+
+// Function to update review text
+async function updateReview(review_id, updatedReviewText) {
+  try {
+    const query = `
+          UPDATE reviews
+          SET review_text = $1
+          WHERE review_id = $2
+          RETURNING *;
+      `;
+    const result = await pool.query(query, [updatedReviewText, review_id]);
+    return result.rowCount > 0; // Return true if at least one row was updated
+  } catch (error) {
+    console.error('Error updating review:', error);
+    throw error;
+  }
+}
+
+// Function to delete review
+async function deleteReview(review_id) {
+  try {
+    const query = `
+          DELETE FROM reviews
+          WHERE review_id = $1
+      `;
+    const result = await pool.query(query, [review_id]);
+    return result.rowCount > 0; // Return true if at least one row was deleted
+  } catch (error) {
+    console.error('Error deleting review:', error);
+    throw error;
+  }
+}
+
 module.exports = {
   registerAccount,
   checkExistingEmail,
@@ -105,5 +157,8 @@ module.exports = {
   getAccountById,
   updateAccount,
   updatePassword,
-  getAccountReviews
+  getAccountReviews,
+  getReviewById,
+  updateReview,
+  deleteReview
 };

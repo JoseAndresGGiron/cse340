@@ -44,4 +44,17 @@ router.post("/update", Util.checkLogin, regValidate.updateAccountRules(), regVal
 // POST route to handle password change form submission
 router.post("/change-password", Util.checkLogin, regValidate.changePasswordRules(), regValidate.checkPasswordChangeData, Util.handleErrors(accountController.changePassword));
 
+// Route to display the update review view
+router.get('/review-update/:review_id', accountController.showUpdateReview);
+
+// Route to handle updating a review
+router.post('/review-update/:review_id', accountController.updateReview);
+
+// Route to display the delete review confirmation view
+router.get('/review-delete/:review_id', accountController.showDeleteReview);
+
+// Route to handle deleting a review
+router.post('/review-delete/:review_id', accountController.deleteReview);
+
+
 module.exports = router;

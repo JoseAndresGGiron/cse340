@@ -1,0 +1,22 @@
+<h1><%= title %></h1>
+
+<!-- Display flash messages if any -->
+<%- messages() %>
+
+<% if (errors) { %>
+<ul class="notice">
+    <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+    <%  }) %>
+</ul>
+<% } %>
+
+<form id="updateForm" class="loginForm" action="/account/review-update/<%= review_id %>" method="POST">
+    <div>
+        <label for="reviewText">Review Text:</label>
+        <textarea id="reviewText" name="review_text" rows="4" cols="50"><%= review_text %></textarea>
+    </div>
+    <button type="submit" disabled>Update Review</button>
+</form>
+
+<script src="../../js/inv-update.js"></script>

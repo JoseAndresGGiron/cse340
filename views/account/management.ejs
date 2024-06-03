@@ -24,3 +24,34 @@
 <h3>Inventory Management</h3>
 <p><a href="/inv/">Go to Inventory Management</a></p>
 <% } %>
+
+<!-- Reviews Section -->
+<div>
+    <h3>My Reviews</h3>
+    <table id="reviewTable">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Review Text</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% reviews.forEach(review => { %>
+            <tr>
+                <td><%= review.inv_make + " " + review.inv_model +" " + review.inv_year  %></td>
+                <td><%= review.review_text %></td>
+                <td><%= review.review_date %></td>
+                <td>
+                    <!-- Update link -->
+                    <a href="/review/update/<%= review.review_id %>">Update</a>
+                    
+                    <!-- Delete link -->
+                    <a href="/review/delete/<%= review.review_id %>">Delete</a>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>

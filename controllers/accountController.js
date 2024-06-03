@@ -145,14 +145,35 @@ async function accountLogin(req, res) {
   }
 }
 
-//Process account management view
+// Process account management view
 async function buildAccountManagement(req, res, next) {
-  let nav = await utilities.getNav();
-  res.render("account/management", {
-    title: "Account Management",
-    nav,
-    errors: null,
-  });
+  try {
+    // Assuming you store accountId in session
+    const account_id = res.locals.accountData.account_id;
+    console.log('account ID' + account_id);
+    
+    // Fetch account data
+    //const accountData = await accountModel.getAccountById(account_id);
+    
+    // Fetch reviews written by the logged-in user
+    const reviews = await accountModel.getAccountReviews(account_id);
+    
+    // Fetch navigation data
+    const nav = await utilities.getNav();
+    
+    // Render the account management view with account data, reviews, and navigation
+    res.render("account/management", {
+      title: "Account Management",
+      nav,
+      //accountData,
+      reviews,
+      errors: null,
+    });
+  } catch (error) {
+    console.error('Error building account management:', error);
+    // Handle the error appropriately, maybe redirect to an error page
+    res.status(500).send('Internal Server Error');
+  }
 }
 
 //Process the update account view

@@ -107,7 +107,7 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  
+
 }
 
 nav ul {
@@ -125,6 +125,7 @@ nav ul li {
   list-style: none;
   display: flex;
 }
+
 nav ul li a {
   color: #272343;
   text-align: center;
@@ -135,6 +136,7 @@ nav ul li a {
   margin: 0;
   padding: 0;
 }
+
 /*Notice Style*/
 .notice {
   background-color: yellow;
@@ -275,27 +277,52 @@ form.loginForm {
   max-width: 90%;
   margin: 0 auto;
 }
+
 form.loginForm div {
   display: flex;
   flex-direction: column;
   row-gap: 0.5em;
 }
+
 form.loginForm div input {
   min-height: 2rem;
 }
+
 form.loginForm button {
   width: 7em;
   align-self: center;
 }
+
 p#loginP {
   text-align: center;
 }
-form.loginForm input:required:invalid, form.loginForm input:focus:invalid {
+
+form.loginForm input:required:invalid,
+form.loginForm input:focus:invalid {
   border-left: 5px solid red;
 }
-form.loginForm input:required:valid{
+
+form.loginForm input:required:valid {
   border-left: 5px solid green;
 }
+
+#reviewTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2
+}
+
 /* Media query for small screens */
 @media screen and (min-width: 768px) {
   html:not(body) {
@@ -318,9 +345,9 @@ form.loginForm input:required:valid{
   ul#inv-display {
     flex-direction: row;
     gap: 2em;
-    
+
     margin: 0 auto;
-    
+
   }
 
   /*Style for inv/detail */
@@ -330,6 +357,7 @@ form.loginForm input:required:valid{
     flex-direction: row;
     gap: 3em;
   }
+
   .inventory-item img {
     flex-basis: 70%;
   }

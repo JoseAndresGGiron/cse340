@@ -78,11 +78,32 @@ async function updatePassword(account_id, hashedPassword) {
   }
 }
 
+async function getAccountReviews(account_id) {
+  try {
+    const query = `
+      SELECT r.review_text, 
+             r.review_date,
+             i.inv_make,
+             i.inv_model,
+             i.inv_year,
+             i.inv_color
+      FROM reviews r 
+      JOIN inventory i ON r.inv_id = i.inv_id 
+      WHERE r.account_id = $1 
+      ORDER BY r.review_date DESC`;
+    const result = await pool.query(query, [account_id]);
+    return result.rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   registerAccount,
   checkExistingEmail,
   getAccountByEmail,
   getAccountById,
   updateAccount,
-  updatePassword
+  updatePassword,
+  getAccountReviews
 };

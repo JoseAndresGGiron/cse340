@@ -117,9 +117,9 @@ Util.buildReviewsHTML = async function (reviews) {
     // Display existing reviews
     reviews.forEach(review => {
       html += '<div class="review">';
-      html += '<p>Reviewer: ' + review.reviewer_full_name+ '</p>';
+      html += '<p><b>' + review.reviewer_full_name+ ':</b></p>';
       html += '<p>' + review.review_text + '</p>';
-      
+      html += '</div>'
 
     });
   } else {

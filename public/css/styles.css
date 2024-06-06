@@ -245,6 +245,17 @@ div#reviews ul li {
   margin: 1em auto;
 }
 
+.review {
+  display: flex;
+  justify-content: flex-start;
+  row-gap: 1em;
+  column-gap: 0.5em;
+  background-color: #F0F2F5;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  padding: 0 1em;
+}
+
 ul#inv-display {
   display: flex;
   flex-direction: column;

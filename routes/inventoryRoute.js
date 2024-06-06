@@ -1,5 +1,6 @@
 //W4 Week Assignment 05/21/2024 20:11pm
 const validate = require("../utilities/inventory-validation")
+const revValidate = require("../utilities/review-validation")
 
 // Needed Resources 
 const express = require("express")
@@ -14,7 +15,7 @@ router.get("/type/:classificationId", Util.handleErrors(invController.buildByCla
 router.get("/detail/:inventoryId", Util.handleErrors(invController.viewInventoryItemDetails));
 
 // Route to handle adding a review
-router.post("/reviews-add", invController.addReview);
+router.post("/reviews-add", Util.checkLogin, revValidate.reviewRules(), Util.handleErrors(invController.addReview));
 
 // Route to serve the management view
 router.get("/", Util.checkAccountType, Util.handleErrors(invController.showManagementView));

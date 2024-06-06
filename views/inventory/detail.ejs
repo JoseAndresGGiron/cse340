@@ -5,8 +5,16 @@
 <% res.redirect('/') %>
 <% } %>
 
-<!--A Message Block-->
-<%# messages() %>
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+    <% } %>
+  
 
 <!--Inventory Item Details-->
 <%- inventoryItemHTML %>

@@ -1,6 +1,6 @@
 //w4 Server Side data Validation learning activities
 const regValidate = require('../utilities/account-validation')
-
+const validate = require('../utilities/review-validation')
 
 //W3 Learning Activities - Deliver Login View
 // Needed Resources
@@ -45,16 +45,16 @@ router.post("/update", Util.checkLogin, regValidate.updateAccountRules(), regVal
 router.post("/change-password", Util.checkLogin, regValidate.changePasswordRules(), regValidate.checkPasswordChangeData, Util.handleErrors(accountController.changePassword));
 
 // Route to display the update review view
-router.get('/review-update/:review_id', accountController.showUpdateReview);
+router.get('/review-update/:review_id', Util.checkLogin, accountController.showUpdateReview);
 
 // Route to handle updating a review
-router.post('/review-update/:review_id', accountController.updateReview);
+router.post('/review-update/:review_id', Util.checkLogin, validate.reviewRules(), validate.checkReviewData, Util.handleErrors(accountController.updateReview));
 
 // Route to display the delete review confirmation view
-router.get('/review-delete/:review_id', accountController.showDeleteReview);
+router.get('/review-delete/:review_id', Util.checkLogin, accountController.showDeleteReview);
 
 // Route to handle deleting a review
-router.post('/review-delete/:review_id', accountController.deleteReview);
+router.post('/review-delete/:review_id', Util.checkLogin, accountController.deleteReview);
 
 
 module.exports = router;

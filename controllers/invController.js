@@ -55,7 +55,8 @@ invCont.viewInventoryItemDetails = async function (req, res, next) {
       nav,
       inventoryItemHTML: inventoryItemHTML,
       reviewsHTML: reviewsHTML,
-      reviewFormHTML: reviewFormHTML
+      reviewFormHTML: reviewFormHTML,
+      errors: req.flash('error')
     });
   } catch (error) {
     // Express error handling middleware will handle the error
